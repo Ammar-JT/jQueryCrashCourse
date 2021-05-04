@@ -1,2 +1,2 @@
 # jQueryCrashCourse
-just did the "jQuery Crash Course" again to revision this library
+Just did the "jQuery Crash Course" by "Traversy Media" again to revision this library
