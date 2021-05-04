@@ -50,6 +50,7 @@
       <button id="btnFadeOut">fade out</button>
       <button id="btnFadeIn">fade in</button>
       <button id="btnFade">fade toggle</button>
+      <div id="status"></div>
       <hr>
 
       <div id="box"><h3>hello world</h3></div>
@@ -59,7 +60,35 @@
     <script>
         //the whole document must be ready then we will do the functions:
         $(document).ready(function(){
-            
+            /*
+            //--------------------------------------
+                // fade in and out and toggle +
+                // 
+            //--------------------------------------
+            $('#btnFadeOut').click(function(){
+                $('#box').fadeOut(fast);
+            });
+            $('#btnFadeIn').click(function(){
+                $('#box').fadeIn(slow);
+            });
+            $('#btnFade').click(function(){
+                //3000ms = 3s
+                $('#box').fadeToggle(3000);
+            });
+            */
+
+            $('#btnFadeOut').click(function(){
+                //3000ms = 3s
+                $('#box').fadeOut(3000, function(){
+                    $('#status').text('Its Gone');
+                });
+            });
+            $('#btnFadeIn').click(function(){
+                //3000ms = 3s
+                $('#box').fadeIn(3000, function(){
+                    $('#status').empty();
+                });
+            });
         });
         
 

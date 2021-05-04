@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Crash Course | Dom Manipulation</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+    </script>
+
+    <style>
+        body{
+            font-size: 17px;
+            font-family: arial;
+            background: #f4f4f4;
+            line-height: 1.5em;
+        }
+        header{
+            background: #333;
+            color: #fff;
+            padding:20px;
+            text-align: center;
+            border-bottom: 4px #000 solid;
+            margin-bottom: 10px;
+        }
+        #container{
+            width:90%;
+            margin:auto;
+            padding:10px;
+        }
+
+        .myClass{
+            color: blue;
+            background: black;
+        }
+        
+        #box{
+            background:#333;
+            color:#fff;
+            padding: 40px;
+            text-align: center;
+            width:500px;
+            height: 80px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>jQuery Crash Course</h1>
+    </header> 
+
+    <div id="container">
+        <ul id="users"></ul>
+        <form id="postForm" action="https://jsonplaceholder.typicode.com/posts">
+            <input type="text" id="title" placeholder="Tilte">
+            <br>
+            <textarea placeholder="body" name="" id="body" cols="30" rows="10"></textarea>
+        <br>
+        <input type="submit" value="submit">
+        </form>
+        <div id="result"></div>
+
+    </div>
+
+    <script>
+        //the whole document must be ready then we will do the functions:
+        $(document).ready(function(){
+            //-----------------------------------------------
+                //load function: load a file to this file +
+                //get function: get the data of that file and bring it in the para meter (data)
+            //-----------------------------------------------
+            //load a another file to #result:
+            //$('#result').load('test.html');
+
+            //load function can take some parameters: 
+            /*
+            $('#result').load('test.html', function(
+                responseTxt, statusTxt, xhr
+            ){
+                if(statusTxt == "success"){
+                    alert('it went fine')
+                }else if (statusTxt == "error"){
+                    alert('Error: ' + xhr.statusText);
+                }
+            });
+            
+
+            $.get('test.html', function(data){
+                $('#result').html(data);
+            });
+
+            */
+
+            //---------------------------------------------
+                //$.getJSON: same as get but for json files, we're get it localy
+                //$.ajax: makes you deal with a server
+                //$.map(): just like $.each()
+            //---------------------------------------------
+            /*
+            $.getJSON('users.json', function(data){
+                //loop through json file:
+                $.each(data, function(i, user){
+                    $('ul#users').append('<li>' + user.firstName + '</li>');
+                });
+            })
+            
+
+            // this means an object: {}
+            $.ajax({
+                //the http request details:
+                method: 'GET',
+                url: 'https://jsonplaceholder.typicode.com/posts',
+                dataType: 'json'
+
+                //after getting the connection done, trigger the funtion(data)
+            }).done(function(data){
+                console.log(data);
+
+                //just another way to loop through a json file:
+                $.map(data, function(post, i){
+                    $('#result').append('<h3>'+post.title+'</h3><p>'+
+                        post.title+'</p>');
+                });
+            });
+            */
+
+            //---------------------------------------------
+                //$('form').submit()
+                //$.post():  will make a post request
+            //---------------------------------------------
+
+            //$('form').submit() means when submit
+            $('#postForm').submit(function(e){
+                e.preventDefault();
+
+                var title = $('#title').val();
+                var body = $('#body').val();
+                var url = $(this).attr('action');
+
+                //$.post():  will make a post request
+                $.post(url, {title:title, body:body}).
+                    done(function(data){
+                        console.log('Post Saved');
+                        console.log(data);
+                    });
+            });
+
+
+
+        });
+        
+
+    </script>
+</body>
+</html>
