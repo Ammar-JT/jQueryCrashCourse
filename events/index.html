@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Crash Course | Selectors</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+    </script>
+
+    <style>
+        body{
+            font-size: 17px;
+            font-family: arial;
+            background: #f4f4f4;
+            line-height: 1.5em;
+        }
+        header{
+            background: #333;
+            color: #fff;
+            padding:20px;
+            text-align: center;
+            border-bottom: 4px #000 solid;
+            margin-bottom: 10px;
+        }
+        #container{
+            width:90%;
+            margin:auto;
+            padding:10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>jQuery Crash Course</h1>
+    </header> 
+
+    <div id="container">
+        <h3>Mouse Events</h3>
+
+        <button id="btn1">Button 1</button>
+        <button id="btn2">Button 2</button>
+
+        <p class="para1">
+            jQuery is a fast, small, and feature-rich JavaScript
+            library. It makes things like HTML document traversal
+            and manipulation, event handling, animation, 
+        </p>
+
+        <p class="para2">
+            and Ajax much simpler with an easy-to-use API that
+            works across a multitude of browsers. With a
+            combination of versatility and extensibility, 
+            jQuery has changed the way that millions of people write JavaScript.
+        </p>
+        <h3 id="coords">Coords:</h3>
+
+        <hr>
+        <form id="form">
+            <label for="name">Name</label>
+            <input type="text" id="name">
+            <br>
+            <label for="email">Email</label>
+            <input type="text" id="email">
+            <br>
+            <label for="gender">Gender</label>
+            <select name="gender" id="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            <label for="name">Name</label>
+            <input type="text" id="name">
+            <br>
+            <input type="submit" value="submit">
+        </form>
+    </div>
+
+    <script>
+        //the whole document must be ready then we will do the functions:
+        $(document).ready(function(){
+            /*
+            -----------
+            click event
+            -----------
+            //selector.event(selfCallFunction(){......});
+            $('#btn1').click(function(){
+                alert('Button Clickeds');
+            });
+
+            //some say this save a couple milli seconds:
+            //selector.on('event', selfCallFunction(){......});
+            $('#btn2').on('click', function(){
+                alert('Button Clickeds');
+            });
+            */
+
+            //--------------------------
+                //on event + an action
+            //--------------------------
+            /*
+            $('#btn1').on('click', function(){
+                //$('.para1').hide();
+                //toggle will show and hide:
+                $('.para1').toggle();
+            });
+            $('#btn2').on('click', function(){
+                $('.para1').show();
+            });
+            */
+
+            /*
+            $("#btn1").on('mouseenter', function(){
+                $('.para1').toggle();
+            });
+            $("#btn1").on('mouseleave', function(){
+                $('.para1').toggle();
+            });
+            
+            // hover combine the above: 
+            $("#btn1").hover( function(){
+                    $('.para1').toggle();
+            });
+            
+
+            $("#btn1").on('mousemove', function(){
+                $('.para1').toggle();
+            });
+            
+
+            $("#btn1").on('mousedown', function(){
+                $('.para1').toggle();
+            });
+            
+            $("#btn1").on('mouseup', function(){
+                $('.para1').toggle();
+            });
+            */
+
+            //-------------------------------------------------
+                // selector + event + function with e parameter
+            //-------------------------------------------------
+            /*
+            $('#btn1').click(function(e){
+                //this will show the e value in console
+                //.. which contain all the selector and event infos
+                console.log(e);
+
+                //this will alert the id of the selector of the event
+                //alert(e.currentTarget.id);
+                
+                //this will alert the button text:
+                alert(e.currentTarget.innerHTML);
+                alert(e.currentTarget.outerHTML); // will give you: <button id="btn1">Button 1</button>
+                alert(e.currentTarget.className);
+
+
+
+            });
+            */
+
+            //------------------------------------------------------------------
+                // a cool use of the e parameter to show the coords fo mouse 
+            //------------------------------------------------------------------
+            /*
+            $(document).on('mousemove', function(e){
+                $('#coords').html('Coords: Y: '+ e.clientY+ 
+                ' Coords: X:' + e.clientX);
+
+            });
+            */
+
+            //-------------------------------------------------
+                // focus & blur + keyup
+            //-------------------------------------------------
+            /*
+            $('input').focus(function(){
+                //alert('focus'); 
+                
+                //$('input').css('background','pink'); //this is not good practise, because you already
+                //.. select $('input'), so it better to do it like next
+                
+                $(this).css('background','pink');
+            });
+
+            $('input').blur(function(){
+                $(this).css('background','white')
+            });
+
+            //key up is an event that trigger when ever you write 
+            $('input').keyup(function(e){
+                console.log(e.target.value)
+            });
+            */
+
+            $('select#gender').change(function(e){
+                alert('Value: ' + e.target.value);
+            });
+            
+            $('#form').submit(function(e){
+                //this one will prevent the form from submitting:
+                e.preventDefault();
+                
+                // you assign the value of the input using the selector.val()
+                var name = $('input#name').val();
+                console.log(name);
+            })
+
+
+
+
+
+
+
+
+        });
+        
+
+    </script>
+</body>
+</html>

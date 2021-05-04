@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Crash Course | Dom Manipulation</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+    </script>
+
+    <style>
+        body{
+            font-size: 17px;
+            font-family: arial;
+            background: #f4f4f4;
+            line-height: 1.5em;
+        }
+        header{
+            background: #333;
+            color: #fff;
+            padding:20px;
+            text-align: center;
+            border-bottom: 4px #000 solid;
+            margin-bottom: 10px;
+        }
+        #container{
+            width:90%;
+            margin:auto;
+            padding:10px;
+        }
+
+        .myClass{
+            color: blue;
+            background: black;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>jQuery Crash Course</h1>
+    </header> 
+
+    <div id="container">
+        <button id="btn1">Button 1</button>
+        <p class="para1">This is a paragraph</p>
+        <p class="para2">This is another paragraph</p>
+        <div class="" id="myDiv"></div>
+
+        <input type="text" id="newItem">
+        <ul id="list">
+            <li>first</li>
+            <li>second</li>
+            <li>third</li>
+
+        </ul>
+
+        <a href="http://google.com">Google</a>
+
+        <br>
+        <ul id="users"></ul>
+    </div>
+
+    <script>
+        //the whole document must be ready then we will do the functions:
+        $(document).ready(function(){
+            //------------------------------------------
+                // multiple css properties +
+                // addClass to an element by magic + 
+                // add a text or a html to an element +
+                // append to a list +
+                // adding attribute to an element +
+
+            //------------------------------------------
+
+            /*
+            // one property
+            //$('p.para1').css('color', 'red');
+
+            // multiple properties, you need to put them in object: 
+            $('p.para1').css({
+                color: 'red',
+                background: '#ccc'
+            });
+
+            
+            //$('p.para2').addClass('myClass');
+            //$('p.para2').remove('myClass');
+            $('#btn1').click(function(){
+                $('p.para2').toggleClass('myClass');        
+            });
+
+
+            //$('#myDiv').text('Why are you bothering me?');
+            $('#myDiv').html('<h3>Why are you bothering me?</h3>');
+            $('ul').append('<li>Appended list item</li>');
+            $('ul').prepend('<li>Prepended list item</li>');
+
+            $('.para1').appendTo('.para2');
+            $('.para1').prependTo('.para2');
+
+            //put hello before ul
+            $('ul').before('<h4>Hello</h4>');
+            //put hello after the ul
+            $('ul').after('<h4>Hello</h4>');
+
+            $('ul').empty(); // the ul will be empty, no li's
+            $('ul').detach(); // the ul will completly disapear
+
+            //adding target attribute to the element <a>
+            $('a').attr('target', '_blank');
+
+            //display attr in alert
+            alert($('a').attr('href'));
+
+            //remove attr
+            $('a').removeAttr('target');
+            */ 
+
+            //---------------------------------------------------
+                // wrap() +
+                // e.which (keyboard key code) +
+                // $.each (loop through an array) +
+                // toArray: we convert an existing list to a js array
+            //---------------------------------------------------
+            //this will wrap every p indivisually inside h:
+            //$('p').wrap('<h1>');
+
+            //this will wrap the p's together inside h: 
+            //$('p').wrapAll('<h1>');
+
+            $('input#newItem').keyup(function(e){
+                var code = e.which; // which will give you the keyboard key code
+                //and 13 is the key code of "enter":
+                if(code == 13){
+                    //will prevent the default which is sending the form
+                    e.preventDefault();
+
+                    $('ul').append('<li>' + e.target.value + '</li>');
+                    console.log(e.target.value);
+
+                }
+            });
+            var myArr = ['Ammar', 'Brad', 'Nate', 'Jose'];
+
+            //$.each means loop through each index of the array
+            //.. and in every iteration the function will be called:
+            $.each(myArr, function(i,val){
+                //console.log((i+1) + '-' + val);
+                $('ul#users').append('<li>' + val + '</li>');
+            });
+
+            //here we take an existing list items and convert it to an array:
+            var newArr = $('ul#list li').toArray();
+            console.log(newArr);
+
+            //here we take the array and seed all the inner values: 
+            $.each(newArr, function(i,val){
+                console.log((i+1) + '-' + val.innerHTML);
+            });
+        });
+        
+
+    </script>
+</body>
+</html>
